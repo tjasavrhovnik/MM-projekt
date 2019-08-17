@@ -1,0 +1,104 @@
+\documentclass[a4paper]{article}
+
+\usepackage[slovene]{babel}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{\Huge\textbf{Projekt pri predmetu Matematično modeliranje}} 
+\author{\large\textsc{Tjaša Vrhovnik}\\
+	Fakulteta za matematiko in fiziko\\
+	Oddelek za matematiko}
+
+\thispagestyle{empty}
+
+\maketitle
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Naloga}
+
+Rešujemo naslednji problem: V ravnini sta dani dve točki, $T_{1}(x_1,y_1)$ in $T_{2}(x_2,y_2)$, kjer je $y_1 > y_2$ in $x_1 < x_2$. Med vsemi kubičnimi polinomi, ki potekajo skozi točke $T_1$, $T_2$ in $T_3 = T_1 + \frac{1}{2} (T_2-T_1)$, iščemo tistega, ki minimizira čas potovanja kroglice po njegovem grafu od $T_1$ do $T_2$.
+
+\section{Rešitev}
+
+Naloga se zdi podobna znamenitemu problemu o brahistohroni, ki ga je zastavil Jacob Bernoulli.
+Označimo iskan polinom s $p(x) = ax^3+bx^2+cx+d$. Polinom $p$ bo določen, ko bomo poznali njegove koeficiente $a$, $b$, $c$ in $d$.
+Za lažje računanje za začetek prestavimo točke tako, da bo $T_1$ v koordinatnem izhodišču. Označimo nove točke:
+\begin{align*}
+T_{1}' &= (0,0), \\
+T_{2}' &= T_2 - T_1 = (x_2-x_1, y_2-y_1), \\
+T_{3}' &= T_3 - T_1 = \frac{1}{2}(T_2 - T_1) = \frac{1}{2}T_{2}'.
+\end{align*}
+S tem bo graf polinoma med $T_{1}'$ in $T_{2}'$ ves čas pod abscisno osjo. Če bi graf dosegel nenegativno vrednost med točkama $T_{1}'$ in $T_{3}'$, bi bil vodilni koeficient polinoma $p$ pozitiven. To bi pomenilo, da bi se kroglica iz začetne točke dvigala, kar fizikalno ni mogoče. Predvidevamo tudi, da so vrednosti polinoma med točkama $T_{3}'$ in $T_{2}'$ povsod negativne; to bomo kasneje potrdili z numeričnimi primeri.
+
+Izračunajmo koeficiente polinoma $p$. Vemo, da je kubični polinom enolično določen s štirimi točkami v ravnini. V našem primeru so znane tri točke na polinomu, kar pomeni, da bomo imeli en prost parameter. Vstavimo koordinate točk $T_{1}'$, $T_{2}'$ in $T_{3}'$ v izraz za polinom $p$ in računajmo:
+\begin{equation}
+p(0) = d = 0,
+\end{equation}
+%
+\begin{equation}
+\label{Eq:p(T_{2}')}
+p(x_2-x_1) = a(x_2-x_1)^3+b(x_2-x_1)^2+c(x_2-x_1) = y_2-y_1,
+\end{equation}
+%
+\begin{equation}
+\label{Eq:p(T_{3}')}
+p \left(\frac{x_2-x_1}{2} \right) = a \left(\frac{x_2-x_1}{2} \right)^3+b \left(\frac{x_2-x_1}{2} \right)^2+c \frac{x_2-x_1}{2} = \frac{y_2-y_1}{2}.
+\end{equation}
+%
+Pomnožimo enačbo~\eqref{Eq:p(T_{3}')} z $2$ in jo odštejmo od enačbe~\eqref{Eq:p(T_{2}')}. Dobimo
+\begin{align}
+\frac{3}{4} a(x_2-x_1)^3 + \frac{1}{2} b(x_2-x_1)^2 &= 0, \nonumber \\
+\frac{3}{2} a(x_2-x_1) + b &= 0, \nonumber \\
+b &= -\frac{3}{2} a(x_2-x_1).
+\end{align}
+%
+Koeficient $c$ izrazimo iz enačbe\eqref{Eq:p(T_{2}')}, pri čemer upoštevamo zgornji izraz za $b$. Računamo
+\begin{align}
+c(x_2-x_1) &= y_2 - y_1 - a(x_2-x_1)^3 - b(x_2-x_1)^2 \nonumber \\
+ &= y_2 - y_1 - a(x_2-x_1)^3 + \frac{3}{2} a(x_2-x_1)^3 \nonumber \\
+ &= y_2 - y_1 + \frac{1}{2} a(x_2-x_1)^3, \nonumber \\
+c &= \frac{y_2-y_1}{x_2-x_1} + \frac{1}{2} a(x_2-x_1)^2.
+\end{align}
+%
+Koeficiente polinoma $p$ smo izrazili s koeficientom $a$, ki je še neznan parameter. Tega bomo določili z minimizacijo časa potovanja po grafu polinoma.
+
+Čas, ki ga kroglica potrebuje za pot med točkama $T_{1}'$ in $T_{2}'$ se izraža z integralom 
+\begin{equation}
+\label{Eq:Cas}
+t = \int_{T_{1}'}^{T_{2}'} \frac{ds}{v}.
+\end{equation}
+%
+Upoštevajmo zakon o ohranitvi energije. V našem primeru pravi, da se vsota kinetične in potencialne energije kroglice med potovanjem ohranja. Uporabimo razmislek, da je graf polinoma ves čas pod abscisno osjo -- enačba se tako glasi
+\begin{equation*}
+\frac{1}{2}mv^2 = mg(-p),
+\end{equation*}
+od koder izrazimo hitrost
+\begin{equation*}
+v = \sqrt{2g(-p)}.
+\end{equation*}
+%
+Vemo še, da je ločna dolžina enaka $ds^2 = dx^2 + dp^2$. Označimo parcialni odvod polinoma $p$ po spremenljivki $x$ z $\frac{dp}{dx}=p'$. Enačba~\eqref{Eq:Cas} torej dobi obliko
+\begin{equation}
+T(a) = \int_{0}^{x_2-x_1} \sqrt{ \frac{1+p'^2}{-2gp}} dx,
+\end{equation}
+kjer smo s $T$ označili funkcijo časa, odvisno od parametra $a$. Naša naloga je poiskati njen minimum.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Literatura
+
+\begin{thebibliography}{99}
+
+\bibitem{zapiski} Zapiski s predavanj prof.~E.~Žagarja pri predmetu Matematično modeliranje, Univerza v Ljubljani, Fakulteta za matematiko in fiziko (študijsko leto 2018/2019).
+
+\end{thebibliography}
+
+\end{document}
