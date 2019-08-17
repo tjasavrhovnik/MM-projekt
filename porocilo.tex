@@ -61,7 +61,7 @@ Pomnožimo enačbo~\eqref{Eq:p(T_{3}')} z $2$ in jo odštejmo od enačbe~\eqref{
 b &= -\frac{3}{2} a(x_2-x_1).
 \end{align}
 %
-Koeficient $c$ izrazimo iz enačbe\eqref{Eq:p(T_{2}')}, pri čemer upoštevamo zgornji izraz za $b$. Računamo
+Koeficient $c$ izračunamo iz enačbe~\eqref{Eq:p(T_{2}')}, pri čemer upoštevamo zgornji izraz za $b$. Računamo
 \begin{align}
 c(x_2-x_1) &= y_2 - y_1 - a(x_2-x_1)^3 - b(x_2-x_1)^2 \nonumber \\
  &= y_2 - y_1 - a(x_2-x_1)^3 + \frac{3}{2} a(x_2-x_1)^3 \nonumber \\
@@ -69,7 +69,7 @@ c(x_2-x_1) &= y_2 - y_1 - a(x_2-x_1)^3 - b(x_2-x_1)^2 \nonumber \\
 c &= \frac{y_2-y_1}{x_2-x_1} + \frac{1}{2} a(x_2-x_1)^2.
 \end{align}
 %
-Koeficiente polinoma $p$ smo izrazili s koeficientom $a$, ki je še neznan parameter. Tega bomo določili z minimizacijo časa potovanja po grafu polinoma.
+Koeficienti polinoma $p$ se izražajo s parametrom $a$, katerega ne poznamo. Polinom $p$ je torej funkcija dveh spremenljivk, $p = p(x,a)$. Spremenljvko $a$ bomo določili z minimizacijo časa potovanja po grafu polinoma.
 
 Čas, ki ga kroglica potrebuje za pot med točkama $T_{1}'$ in $T_{2}'$ se izraža z integralom 
 \begin{equation}
@@ -81,16 +81,24 @@ Upoštevajmo zakon o ohranitvi energije. V našem primeru pravi, da se vsota kin
 \begin{equation*}
 \frac{1}{2}mv^2 = mg(-p),
 \end{equation*}
-od koder izrazimo hitrost
+od koder izrazimo hitrost potovanja kroglice
 \begin{equation*}
 v = \sqrt{2g(-p)}.
 \end{equation*}
 %
-Vemo še, da je ločna dolžina enaka $ds^2 = dx^2 + dp^2$. Označimo parcialni odvod polinoma $p$ po spremenljivki $x$ z $\frac{dp}{dx}=p'$. Enačba~\eqref{Eq:Cas} torej dobi obliko
+Vemo še, da je ločna dolžina enaka $ds^2 = dx^2 + dp^2$. Označimo parcialni odvod polinoma $p$ po spremenljivki $x$ z $\frac{dp}{dx}=p'$. Enačba~\eqref{Eq:Cas} tako dobi obliko
 \begin{equation}
 T(a) = \int_{0}^{x_2-x_1} \sqrt{ \frac{1+p'^2}{-2gp}} dx,
 \end{equation}
-kjer smo s $T$ označili funkcijo časa, odvisno od parametra $a$. Naša naloga je poiskati njen minimum.
+kjer smo s $T$ označili funkcijo časa, odvisno od spremenljivke $a$. Naša naloga je poiskati njen minimum.
+Analitično iskanje minimuma funkcije $T$ je zahtevno; pomagali si bomo z numeriko in s pomočjo programa Matlab poiskali vrednost $a$, ki ustreza minimalni vrednosti funkcije $T$.
+
+Našli smo polinom, ki minimizira čas potovanja kroglice skozi točke $T_{1}'$, $T_{2}'$ in $T_{3}'$. Vendar je naša naloga poiskati polinom, ki vsebuje točke $T_1$, $T_2$ in $T_3$. Časa potovanj po grafih obeh polinomov sta enaka, saj se obliki (ukrivljenosti) polinomov ujemata. Iskani polinom namreč dobimo tako, da polinom skozi premaknjene točke transliramo za krajevni vektor točke $T_1$.
+Označimo polinom skozi premaknjene točke s $p_1(x) = ax^3+bx^2+cx+d$ (njegove koeficiente smo že izračunali). Polinom skozi prvotne točke, ki nas zanima, ustreza zvezi
+\begin{align}
+p(x) = a(x-x_1)^3 + b(x-x_1)^2 + c(x-x_1) + d + y_1.
+\end{align}
+Ker poznamo koeficiente $a$, $b$, $c$ in $d$, vrednosti $x_1$ in $y_1$ pa sta koordinati točke $T_1$, poznamo tudi iskani polinom $p$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Literatura
