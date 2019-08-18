@@ -1,4 +1,4 @@
-function risi_brah(T1,T2)
+function risi_brahi(T1,T2)
 % RISI_BRAH narise brahistohrono med tockama T1 in T2.
 % Pri tem parameter theta lezi na intervalu [0,theta0],
 % kjer je theta0 dobljena s funkcijo isci_theta.
@@ -17,7 +17,7 @@ y = -1/2*k^2*(1-cos(theta)) + T1(2);
 
 % risanje
 hold on
-plot(x,y,'b','LineWidth',3);
+plot(x,y,'b');
 
 grid on
 axis equal

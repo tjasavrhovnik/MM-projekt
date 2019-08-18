@@ -1,21 +1,30 @@
-% Program narise kubicni polinom skozi tocke T1, T2, T3.
+% Program doloci koeficiente kubicnega polinoma skozi izhodisce,
+% ki minimizira cas potovanja kroglice, in ga narise.
+% Nato doloci polinom skozi tocke T1, T2, T3 iz podatkov.
+% Narise oba polinoma.
+% Izracuna cas potovanja po iskanem polinomu, ter za primerjavo
+% cas potovanja po premici in brahistohroni. Narise graf polinoma
+% in brahistohrono.
 
-% Izberemo koordinate tock na krivulji, npr.:
-x1 = 1;
-y1 = 5;
-x2 = 7;
-y2 = 2;
+% Graficni vnos tock T1 in T2 na krivulji:
+[x,y] = ginput(2);
+x1 = x(1);
+y1 = y(1);
+x2 = x(2);
+y2 = y(2);
+% x1 = 1;
+% y1 = 5;
+% x2 = 7;
+% y2 = 2;
 
 % gravitacijski pospesek
 g = 9.8;
 
-% Izberemo parameter a.
-% a = doloci_polinom(x1,y1,x2,y2);
-% a = -0.05;
-a = -0.0440;
-% a = -0.0441;
+% Dolocimo parameter a.
+a = doloci_polinom(x1,y1,x2,y2); % = -0.0440
+% a = -0.05; % numericni priblizek s poskusanjem
 
-% Izracunamo ostale koeficiente polinoma preko a.
+% Izracunamo ostale koeficiente polinoma (skozi izhodisce) preko a.
 b = @(a) -3/2*a*(x2-x1);
 c = @(a) (y2-y1)/(x2-x1) + 1/2*a*(x2-x1)^2;
 d = 0;
@@ -33,14 +42,15 @@ hold on
 t = linspace(0,x2,100);
 plot(t,p(t), '--')
 plot(t,r(t))
+grid on
 hold off
 
 figure
 
 hold on
 s = linspace(x1,x2,100);
-plot(s,r(s))
-risi_brah([x1 y1],[x2 y2])
+plot(s,r(s), 'r')
+risi_brahi([x1 y1],[x2 y2])
 hold off
 
 % Cas potovanja izracunamo za polinom p (saj je v celoti pod x-osjo),
