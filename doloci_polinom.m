@@ -16,26 +16,16 @@ c = @(a) (y2-y1)/(x2-x1) + 1/2*a*(x2-x1)^2;
 d = 0;
 
 % polinom in odvod
-p = @(x,a) a.*x^3 + b.*x^2 + c.*x + d;
-dp = @(x,a) 3*a.*x^2 + 2*b.*x + c;
-
+p = @(a,x) a.*x.^3 + b(a).*x.^2 + c(a).*x + d;
+dp = @(a,x) 3.*a.*x.^2 + 2.*b(a).*x + c(a);
 
 % Cas potovanja po krivulji podaja funkcija T(a).
 % Integriramo funkcijo f (2 spremenljivki),
-% f = @(x,a) sqrt((1+dp.^2)./(-2*g.*p)),
+% f = @(a,x) sqrt((1+dp.^2)./(-2*g.*p)),
 % po x-u v mejah od 0 do x2-x1.
 
-% 1. nacin
-% f = @(a) (@(x) sqrt.((1+dp.^2)./(-2*g.*p)));
-%
-% syms x a
-% T = @(a) int(f, x, 0, x2-x1);
-
-% 2. nacin
-syms x a
-f = sqrt((1+dp.^2)./(-2*g.*p));
-T = @(a) int(f,x,0,x2-x1);
-
+f = @(a,x) ((1+dp(a,x).^2)./(-2*g.*p(a,x))).^(1/2);
+T = @(a) integral(@(x) f(a,x), 0, x2-x1);
 
 % Minimiziramo cas potovanja
 A = fminsearch(T, 0);

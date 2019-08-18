@@ -11,7 +11,9 @@ g = 9.8;
 
 % Izberemo parameter a.
 % a = doloci_polinom(x1,y1,x2,y2);
-a = -0.05;
+% a = -0.05;
+a = -0.0440;
+% a = -0.0441;
 
 % Izracunamo ostale koeficiente polinoma preko a.
 b = @(a) -3/2*a*(x2-x1);
