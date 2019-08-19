@@ -7,23 +7,22 @@
 % cas potovanja po premici in brahistohroni. Narise graf polinoma
 % in brahistohrono.
 
-% Graficni vnos tock T1 in T2 na krivulji:
+% Graficni vnos tock na krivulji:
 [x,y] = ginput(2);
-% koordinate pomnozimo z 10, saj ginput izbira na [0,1]
-x1 = x(1)*10 
-y1 = y(1)*10
-x2 = x(2)*10
-y2 = y(2)*10
-% x1 = 1;
-% y1 = 5;
-% x2 = 7;
-% y2 = 2;
+% Koordinate pomnozimo z 10, saj ginput izbira na [0,1]. Izpisemo
+% izbrani tocki T1 in T2.
+x1 = x(1)*10; 
+y1 = y(1)*10;
+x2 = x(2)*10;
+y2 = y(2)*10;
+T1 = [x1,y1]
+T2 = [x2, y2]
 
 % gravitacijski pospesek
 g = 9.8;
 
 % Dolocimo parameter a.
-a = doloci_polinom(x1,y1,x2,y2);
+a = doloci_polinom(x1,y1,x2,y2)
 
 % Izracunamo ostale koeficiente polinoma (skozi izhodisce) preko a.
 b = @(a) -3/2*a*(x2-x1);

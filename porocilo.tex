@@ -108,7 +108,7 @@ Vrednost spremenljivke $a$, ki minimizira funkcijo časa $T$ poiščemo numerič
 \subsection{Program \texttt{doloci\_polinom.m}}
 
 Oglejmo si program \texttt{doloci\_polinom.m} v Matlabu.
-Program kot argumente sprejme koordinate točk $T_1$ in $T_2$ pri čemer velja $x_1, y_1, x_2, y_2 \in \mathbb{R}$, $y_1 > y_2$ in $x_1 < x_2$. Kot smo razmislili v prejšnjem poglavju, je smiselno točke translirati tako, da točka $T_1$ leži v koordinatnem izhodišču. Koeficiente transliranega polinoma $p$ definiramo kot funkcije spremenljivke $a$, ter definiramo polinom in njegov odvod, ki sta funkciji spremenljivk $a$ in $x$. Funkcijo $T$ definiramo kot v enačbi~\eqref{Eq:CasInt}. Za minimizacijo te funkcije uporabimo vgrajeno funkcijo \texttt{fminsearch}, ki vrne iskano vrednost spremenljivke $a$, pri kateri je čas potovanja kroglice po grafu polinoma najmanjši. Vrednost označimo z $A$.
+Program kot argumente sprejme koordinate točk $T_1$ in $T_2$ pri čemer velja $x_1, y_1, x_2, y_2 \in \mathbb{R}$, $y_1 > y_2$ in $x_1 < x_2$. Kot smo razmislili v prejšnjem poglavju, je smiselno točke translirati tako, da točka $T_1$ leži v koordinatnem izhodišču. Koeficiente transliranega polinoma $p$ definiramo kot funkcije spremenljivke $a$, ter definiramo polinom in njegov odvod, ki sta funkciji spremenljivk $a$ in $x$. Funkcijo $T$ definiramo kot v enačbi~\eqref{Eq:CasInt}. Za minimizacijo te funkcije uporabimo vgrajeno funkcijo \texttt{fminsearch}, ki vrne iskano vrednost spremenljivke $a$, pri kateri je čas potovanja kroglice po grafu polinoma najmanjši. Vrednost v programu označimo z $A$.
 Kako smo določili začetni približek za vrednost $A$, ki je obvezen argument funkcije \texttt{fminsearch}? Že v začetku smo premislili, da bo vodilni koeficient polinoma negativen. Če izberemo $a=0$, se translirani polinom glasi $p(x) = \frac{y_2-y_1}{x_2-x_1} x$, kar je premica skozi točke $T_{1}'$, $T_{2}'$ in $T_{3}'$. Z naraščanjem absolutne vrednosti $a$ postaja graf polinoma čedalje bolj ukrivljen. Tako za $a<0$ kmalu doseže nenegativne vrednosti med točkama $T_{3}'$ in $T_{2}'$; izračunan čas je v tem primeru kompleksno število, zato smo v težavah. Vendar na konkretnih primerih ugotovimo, da je za negativne vrednosti $a$, ki so blizu $0$ potreben čas manjši od časa potovanja po premici, z manjšanjem $a$ od neke vrednosti $a$ dalje pa se čas povečuje. Nadalje obstaja še manjša vrednost $a$, pri kateri graf polinoma preide abscisno os. Od tod sklepamo, da je ustrezen začetni približek $A=0$.
 
 Program \texttt{doloci\_polinom.m} vrne vodilni koeficient polinoma $p$ skozi translirane točke, od koder lahko izračunamo ostale koeficiente polinoma. 
@@ -139,20 +139,66 @@ Programi, ki določijo, narišejo brahistohrono in izračunajo čas potovanja po
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Primeri
 \section{Primeri}
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Vzorčni primer}
 
-%%%
-\subsection{1.~primer}
+Najprej si oglejmo vzorčni primer, kjer so koordinate točk $T_1$ in $T_2$ naravna števila. Izberimo
+\begin{align*}
+T_1(1,5), \\
+T_2(7,2).
+\end{align*}
+%
+Točke vstavimo v program \texttt{doloci\_polinom.m} in izračunajmo koeficiente polinoma $p$, katerega graf poteka skozi koordinatno izhodišče. Dobimo vrednosti
+\begin{align*}
+a &= -0.0440, \\
+b &= 0.3960, \\
+c &= -1.2920, \\
+d &= 0.
+\end{align*}
+%
+Če jih vstavimo v enakost~\eqref{Eq:r(x)} in upoštevamo koordinate izbranih točk, dobimo eksplicitno formulo za polinom $r$, ki minimizira čas potovanja skozi izbrane točke $T_1(1,5)$, $T_2(7,2)$ in $T_3(4,3.5)$.
+
+Koordinate točk vstavimo še v program \texttt{risi\_polinom.m} in si oglejmo sliko, ki prikazuje grafa transliranega polinoma skozi koordinatno izhodišče s črtkano črto ter iskanega polinoma z modro barvo.
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.52]{primer2-polinom.png}
+\caption{Grafa polinomov, določenih s točkama $T_1(1,5)$ in $T_2(7,2)$.}
+\end{center}
+\end{figure}
+%
+S slike vidimo, da graf transliranega polinoma med točkama $T_{1}'$ in $T_{2}'$ v celoti leži pod abscisno osjo, kar je bil eden izmed naših kriterijev.
+
+Opazujmo še vodilni koeficient $a$. Vrednost, ki jo vrne program, znaša $a = -0.0440$. Preden sem definirala funkcije, ki določijo optimalno pot kroglice, sem za občutek narisala nekaj grafov kubičnih polinomov skozi zgoraj izbrane točke in izračunala čas potovanja po njih. S poskušanjem in ugotovitvah, ki so opisana v razdelku o numerični rešitvi, sem prišla do približka $a = -0.05$, kar se zdi dober približek za iskano vrednost v konkretnem primeru. 
+
+Druga slika, ki jo vrne program \texttt{risi\_polinom.m} predstavlja graf iskanega kubičnega polinoma ter brahistohrono. Krivulji imata skupni začetno in končno točko. 
+%
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.6]{primer2-PolBrah.png}
+\caption{Kubični polinom in brahstohrona, določeni s točkama $T_1(1,5)$ in $T_2(7,2)$.}
+\end{center}
+\end{figure}
+%
+
+Spodnje vrednosti so izračunani časi potovanja kroglice po treh krivuljah. Čas potovanja po brahistohroni je res najmanjši, najdlje pa kroglica potrebuje za pot po premici.
+%
+\begin{align*}
+t_{polinom} &= 1.590217900171090, \\
+t_{brahistohrona} &= 1.395989176219715, \\
+t_{premica} &= 1.749635530559413.
+\end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Primer z uporabo grafičnega vmesnika}
 
 Oglejmo si primer, kjer smo v programu \texttt{risi\_polinom.m} točki $T_1(x_1,y_1)$ in $T_2(x_2,y_2)$ izbrali z grafičnim vmesnikom. Koordinate točk ustrezajo vrednostim
-
-$x_1 = 0.930018416206262$,
-
-$y_1 = 8.983644859813083$,
-
-$x_2 = 9.456721915285449$,
-
-$y_2 = 2.792056074766355$.
-
+\begin{align*}
+x_1 &= 0.930018416206262, \\
+y_1 &= 8.983644859813083, \\
+x_2 &= 9.456721915285449, \\
+y_2 &= 2.792056074766355.
+\end{align*}
+%
 Program izriše naslednji sliki.
 
 \begin{figure}[h!]
@@ -166,16 +212,22 @@ Program izriše naslednji sliki.
 \end{figure}
 
 Izračunani časi potovanja po kubičnem polinomu, brahistohorni in premici:
-
-$t_{polinom} = 1.800452978985828$,
-
-$t_{brahistohrona} = 1.657073117759419$,
-
-$t_{premica} = 1.913116876467396$.
-
+\begin{align*}
+t_{polinom} &= 1.800452978985828, \\
+t_{brahistohrona} &= 1.657073117759419, \\
+t_{premica} &= 1.913116876467396.
+\end{align*}
+%
 Opazimo, da se numerični rezultati ujemajo s pričakovanji: čas potovanja po brahistohroni je najmanjši, sledi mu kubični polinom, premica pa da najpočasnejšo pot.
 
-Lahko si ogledamo še vrednost koeficienta $a$. Ta je enaka $a = -0.023312500000000$.
+Izračunajmo še vrednost koeficientov polinoma $p$:
+\begin{align*}
+a &= -0.023312500000000, \\
+b &= 0.269188535911602, \\ 
+c &= -1.507190104569076, \\ 
+d &= 0.
+\end{align*}
+Če koeficiente vstavimo v zvezo~\eqref{Eq:r(x)} in upoštevamo koordinate izbranih točk $T_1$ in $T_2$, dobimo eksplicitno formulo iskanega polinoma $r$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Literatura
