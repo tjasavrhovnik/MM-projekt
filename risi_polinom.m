@@ -10,10 +10,10 @@
 % Graficni vnos tock T1 in T2 na krivulji:
 [x,y] = ginput(2);
 % koordinate pomnozimo z 10, saj ginput izbira na [0,1]
-x1 = x(1)*10; 
-y1 = y(1)*10;
-x2 = x(2)*10;
-y2 = y(2)*10;
+x1 = x(1)*10 
+y1 = y(1)*10
+x2 = x(2)*10
+y2 = y(2)*10
 % x1 = 1;
 % y1 = 5;
 % x2 = 7;

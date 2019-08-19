@@ -21,6 +21,10 @@
 
 \newpage
 
+\tableofcontents
+
+\newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Naloga}
@@ -30,14 +34,14 @@ Rešujemo naslednji problem: V ravnini sta dani dve točki, $T_{1}(x_1,y_1)$ in 
 \section{Izpeljava}
 
 Naloga se zdi podobna znamenitemu problemu o brahistohroni, ki ga je zastavil Jacob Bernoulli.
-Označimo iskan polinom s $p(x) = ax^3+bx^2+cx+d$. Polinom $p$ bo določen, ko bomo poznali njegove koeficiente $a$, $b$, $c$ in $d$.
+Označimo iskan polinom z $r(x) = a_{3}x^3+a_{2}x^2+a_{1}x+a_{0}$. Polinom $r$ bo določen, ko bomo poznali njegove koeficiente $a_{3}$, $a_{2}$, $a_{1}$ in $a_{0}$.
 Za lažje računanje za začetek prestavimo točke tako, da bo $T_1$ v koordinatnem izhodišču. Označimo nove točke:
 \begin{align*}
 T_{1}' &= (0,0), \\
 T_{2}' &= T_2 - T_1 = (x_2-x_1, y_2-y_1), \\
 T_{3}' &= T_3 - T_1 = \frac{1}{2}(T_2 - T_1) = \frac{1}{2}T_{2}'.
 \end{align*}
-S tem bo graf polinoma med $T_{1}'$ in $T_{2}'$ ves čas pod abscisno osjo. Če bi graf dosegel nenegativno vrednost med točkama $T_{1}'$ in $T_{3}'$, bi bil vodilni koeficient polinoma $p$ pozitiven. To bi pomenilo, da bi se kroglica iz začetne točke dvigala, kar fizikalno ni mogoče. Predvidevamo tudi, da so vrednosti polinoma med točkama $T_{3}'$ in $T_{2}'$ povsod negativne; to bomo kasneje potrdili z numeričnimi primeri.
+S tem bo graf transliranega polinoma $p(x) = ax^3+bx^2+cx+d$ med $T_{1}'$ in $T_{2}'$ ves čas pod abscisno osjo. Če bi graf dosegel nenegativno vrednost med točkama $T_{1}'$ in $T_{3}'$, bi bil vodilni koeficient polinoma $p$ pozitiven. To bi pomenilo, da bi se kroglica iz začetne točke dvigala, kar fizikalno ni mogoče. Predvidevamo tudi, da so vrednosti polinoma med točkama $T_{3}'$ in $T_{2}'$ povsod negativne; to bomo kasneje potrdili z numeričnimi primeri.
 
 Izračunajmo koeficiente polinoma $p$. Vemo, da je kubični polinom enolično določen s štirimi točkami v ravnini. V našem primeru so znane tri točke na polinomu, kar pomeni, da bomo imeli en prost parameter. Vstavimo koordinate točk $T_{1}'$, $T_{2}'$ in $T_{3}'$ v izraz za polinom $p$ in računajmo:
 \begin{equation}
@@ -78,7 +82,7 @@ Koeficienti polinoma $p$ se izražajo s parametrom $a$, katerega ne poznamo. Pol
 t = \int_{T_{1}'}^{T_{2}'} \frac{ds}{v}.
 \end{equation}
 %
-Upoštevajmo zakon o ohranitvi energije. V našem primeru pravi, da se vsota kinetične in potencialne energije kroglice med potovanjem ohranja. Uporabimo razmislek, da je graf polinoma ves čas pod abscisno osjo -- enačba se tako glasi
+Upoštevajmo zakon o ohranitvi energije, ki v našem primeru pravi, da se vsota kinetične in potencialne energije kroglice med potovanjem ohranja. Uporabimo razmislek, da je graf polinoma ves čas pod abscisno osjo -- enačba se tako glasi
 \begin{equation*}
 \frac{1}{2}mv^2 = mg(-p),
 \end{equation*}
@@ -87,7 +91,7 @@ od koder izrazimo hitrost potovanja kroglice
 v = \sqrt{2g(-p)}.
 \end{equation*}
 %
-Vemo še, da je ločna dolžina enaka $ds^2 = dx^2 + dp^2$. Označimo parcialni odvod polinoma $p$ po spremenljivki $x$ z $\frac{dp}{dx}=p'$. Enačba~\eqref{Eq:Cas} tako dobi obliko
+Vemo še, da je ločna dolžina enaka $ds^2 = dx^2 + dp^2$. Označimo parcialni odvod polinoma $p$ po spremenljivki $x$ s $p'=\frac{dp}{dx}$. Enačba~\eqref{Eq:Cas} tako dobi obliko
 \begin{equation}
 \label{Eq:CasInt}
 T(a) = \int_{0}^{x_2-x_1} \sqrt{ \frac{1+p'^2}{-2gp}} dx,
@@ -95,20 +99,83 @@ T(a) = \int_{0}^{x_2-x_1} \sqrt{ \frac{1+p'^2}{-2gp}} dx,
 kjer smo s $T$ označili funkcijo časa, odvisno od spremenljivke $a$. Naša naloga je poiskati njen minimum.
 Analitično iskanje minimuma funkcije $T$ je zahtevno; pomagali si bomo z numeriko in s pomočjo programa Matlab poiskali vrednost $a$, ki ustreza minimalni vrednosti funkcije $T$.
 
-Našli smo polinom, ki minimizira čas potovanja kroglice skozi točke $T_{1}'$, $T_{2}'$ in $T_{3}'$. Vendar je naša naloga poiskati polinom, ki vsebuje točke $T_1$, $T_2$ in $T_3$. Časa potovanj po grafih obeh polinomov sta enaka, saj se obliki (ukrivljenosti) polinomov ujemata. Iskani polinom namreč dobimo tako, da polinom skozi premaknjene točke transliramo za krajevni vektor točke $T_1$.
-Označimo polinom skozi premaknjene točke s $p_1(x) = ax^3+bx^2+cx+d$ (njegove koeficiente smo že izračunali). Polinom skozi prvotne točke, ki nas zanima, ustreza zvezi
-\begin{align}
-p(x) = a(x-x_1)^3 + b(x-x_1)^2 + c(x-x_1) + d + y_1.
-\end{align}
-Ker poznamo koeficiente $a$, $b$, $c$ in $d$, vrednosti $x_1$ in $y_1$ pa sta koordinati točke $T_1$, poznamo tudi iskani polinom $p$.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Numerična rešitev
 \section{Numerična rešitev}
 
-Vrednost spremenljivke $a$, ki minimizira funkcijo časa $T$ poiščemo numerično. Oglejmo si program \texttt{doloci\_polinom.m} v Matlabu.
+Vrednost spremenljivke $a$, ki minimizira funkcijo časa $T$ poiščemo numerično. 
 
-Program kot argumente sprejme koordinate tock $T_1$ in $T_2$ pri čemer velja $x_1, y_1, x_2, y_2 \in \mathbb{R}$, $y_1 > y_2$ in $x_1 < x_2$. Kot smo razmislili v prejšnjem poglavju, je smiselno točke translirati tako, da točka $T_1$ leži v koordinatnem izhodišču. Koeficiente transliranega polinoma $p$ definiramo kot funkcije spremenljivke $a$, ter definiramo polinom in njegov odvod, ki sta funkciji spremenljivk $a$ in $x$. Funkcijo $T$ definiramo kot v enačbi~\eqref{Eq:CasInt}. Za minimizacijo te funkcije uporabimo vgrajeno funkcijo \texttt{fminsearch}, ki vrne iskano vrednost spremenljivke $a$, pri kateri je čas potovanja kroglice po grafu polinoma najmanjši. Vrednost označimo z $A$.
+%%%
+\subsection{Program \texttt{doloci\_polinom.m}}
+
+Oglejmo si program \texttt{doloci\_polinom.m} v Matlabu.
+Program kot argumente sprejme koordinate točk $T_1$ in $T_2$ pri čemer velja $x_1, y_1, x_2, y_2 \in \mathbb{R}$, $y_1 > y_2$ in $x_1 < x_2$. Kot smo razmislili v prejšnjem poglavju, je smiselno točke translirati tako, da točka $T_1$ leži v koordinatnem izhodišču. Koeficiente transliranega polinoma $p$ definiramo kot funkcije spremenljivke $a$, ter definiramo polinom in njegov odvod, ki sta funkciji spremenljivk $a$ in $x$. Funkcijo $T$ definiramo kot v enačbi~\eqref{Eq:CasInt}. Za minimizacijo te funkcije uporabimo vgrajeno funkcijo \texttt{fminsearch}, ki vrne iskano vrednost spremenljivke $a$, pri kateri je čas potovanja kroglice po grafu polinoma najmanjši. Vrednost označimo z $A$.
 Kako smo določili začetni približek za vrednost $A$, ki je obvezen argument funkcije \texttt{fminsearch}? Že v začetku smo premislili, da bo vodilni koeficient polinoma negativen. Če izberemo $a=0$, se translirani polinom glasi $p(x) = \frac{y_2-y_1}{x_2-x_1} x$, kar je premica skozi točke $T_{1}'$, $T_{2}'$ in $T_{3}'$. Z naraščanjem absolutne vrednosti $a$ postaja graf polinoma čedalje bolj ukrivljen. Tako za $a<0$ kmalu doseže nenegativne vrednosti med točkama $T_{3}'$ in $T_{2}'$; izračunan čas je v tem primeru kompleksno število, zato smo v težavah. Vendar na konkretnih primerih ugotovimo, da je za negativne vrednosti $a$, ki so blizu $0$ potreben čas manjši od časa potovanja po premici, z manjšanjem $a$ od neke vrednosti $a$ dalje pa se čas povečuje. Nadalje obstaja še manjša vrednost $a$, pri kateri graf polinoma preide abscisno os. Od tod sklepamo, da je ustrezen začetni približek $A=0$.
+
+Program \texttt{doloci\_polinom.m} vrne vodilni koeficient polinoma $p$ skozi translirane točke, od koder lahko izračunamo ostale koeficiente polinoma. 
+Našli smo torej polinom, ki minimizira čas potovanja kroglice skozi točke $T_{1}'$, $T_{2}'$ in $T_{3}'$. Vendar je naša naloga poiskati polinom $r$, ki vsebuje točke $T_1$, $T_2$ in $T_3$. Časa potovanj po grafih obeh polinomov sta enaka, saj se obliki (ukrivljenosti) polinomov ujemata. Iskani polinom namreč dobimo tako, da polinom skozi premaknjene točke transliramo za krajevni vektor točke $T_1$.
+Polinom skozi prvotne točke, ki nas zanima, ustreza zvezi
+\begin{align}
+\label{Eq:r(x)}
+r(x) = a(x-x_1)^3 + b(x-x_1)^2 + c(x-x_1) + d + y_1.
+\end{align}
+Ker poznamo koeficiente $a$, $b$, $c$ in $d$, vrednosti $x_1$ in $y_1$ pa sta koordinati točke $T_1$, poznamo tudi iskani polinom $p$.
+
+%%%
+\subsection{Program \texttt{risi\_polinom.m}}
+
+Za vizualizacijo uporabimo program \texttt{risi\_polinom.m}.
+Ta najprej odpre koordinatno mrežo velikosti $[0,1] \times [0,1]$, na kateri uporabnik s klikom izbere dve točki. Zaradi lažje predstave program koordinate izbranih točk pomnoži s faktorjem $10$, tako dobljeni točki pa ustrezata točkama $T_1$ in $T_2$, ki določata polinom.
+Ko sta točki izbrani, program s pomočjo klica programa \texttt{doloci\_polinom.m} izračuna koeficient $a$, od tod pa še koeficiente $b$, $c$ in $d$ transliranega polinoma skozi koordinatno izhodišče. Kot v enakosti~\eqref{Eq:r(x)} definira še iskani polinom $r$ skozi točke $T_1$, $T_2$ in $T_3$.
+
+Izrišeta se dve sliki.
+Na prvi je s črtkano črto predstavljen transliran polinom $p$, ki poteka skozi koordinatno izhodišče, in na njem označene točke $T_{1}'$, $T_{2}'$ in $T_{3}'$.
+Polna črta predstavlja iskani polinom $r$, oznake $\times$ pa so izbrane točke $T_1$, $T_2$ in $T_3$, ki ga določajo.  
+%
+Vemo, da je najhitrejša pot kroglice po grafu med dvema točkama v ravnini, ki ustrezata $y_1 > y_2$ in $x_1 < x_2$, brahistohrona. Zato bomo naredili primerjavo brahistohrone s kubičnim polinomom, ki imata skupni začetno in končno točko $T_1$ in $T_2$, polinom pa vsebuje še točko $T_3 = T_1 + \frac{1}{2} (T_2-T_1) $.
+Druga slika predstavlja brahistohrono in kubični polinom, ki minimizira čas potovanja skozi dane točke. S simbolom $\times$ so označene točke $T_1$, $T_2$ in $T_3$.
+
+Program izračuna in izpiše še čas potovanja po kubičnem polinomu, brahistohroni in premici skozi dane točke.
+Programi, ki določijo, narišejo brahistohrono in izračunajo čas potovanja po brahistohroni ter premici (\texttt{isci\_theta.m}, \texttt{risi\_brahi.m} in \texttt{cas\_brahi.m}) so bili napisani na vajah predmeta Matematično modeliranje. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Primeri
+\section{Primeri}
+
+%%%
+\subsection{1.~primer}
+
+Oglejmo si primer, kjer smo v programu \texttt{risi\_polinom.m} točki $T_1(x_1,y_1)$ in $T_2(x_2,y_2)$ izbrali z grafičnim vmesnikom. Koordinate točk ustrezajo vrednostim
+
+$x_1 = 0.930018416206262$,
+
+$y_1 = 8.983644859813083$,
+
+$x_2 = 9.456721915285449$,
+
+$y_2 = 2.792056074766355$.
+
+Program izriše naslednji sliki.
+
+\begin{figure}[h!]
+\includegraphics[scale=0.6]{primer1-polinom.png}
+\caption{Kubični polinom, ki minimizira čas potovanja kroglice skozi točke $T_1$, $T_2$ in $T_3$, je predstavljen s polno črto. S črtkano črto je predstavljen transliran polinom skozi koordinatno izhodišče.}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics[scale=0.6]{primer1-PolBrah.png}
+\caption{Z rdečo barvo je predstavljen kubični polinom, ki minimizira čas potovanja kroglice skozi točke $T_1$, $T_2$ in $T_3$, z modro pa brahistohorna skozi točki $T_1$ in $T_2$.}
+\end{figure}
+
+Izračunani časi potovanja po kubičnem polinomu, brahistohorni in premici:
+
+$t_{polinom} = 1.800452978985828$,
+
+$t_{brahistohrona} = 1.657073117759419$,
+
+$t_{premica} = 1.913116876467396$.
+
+Opazimo, da se numerični rezultati ujemajo s pričakovanji: čas potovanja po brahistohroni je najmanjši, sledi mu kubični polinom, premica pa da najpočasnejšo pot.
+
+Lahko si ogledamo še vrednost koeficienta $a$. Ta je enaka $a = -0.023312500000000$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Literatura
