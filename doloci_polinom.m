@@ -3,6 +3,7 @@ function A = doloci_polinom(x1,y1,x2,y2)
 % skozi tocke T1=(x1,y1), T2=(x2,y2), T3=T1+1/2(T2-T1),
 % po katerem kroglica potuje najhitreje. (x1<x2, y1>y2)
 % p(x)=ax^3+bx^2+cx+d
+% Vhodni podatki so koordinate tock T1 in T2.
 
 % gravitacijski pospesek
 g = 9.8;

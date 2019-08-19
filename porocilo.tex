@@ -27,7 +27,7 @@
 
 Rešujemo naslednji problem: V ravnini sta dani dve točki, $T_{1}(x_1,y_1)$ in $T_{2}(x_2,y_2)$, kjer je $y_1 > y_2$ in $x_1 < x_2$. Med vsemi kubičnimi polinomi, ki potekajo skozi točke $T_1$, $T_2$ in $T_3 = T_1 + \frac{1}{2} (T_2-T_1)$, iščemo tistega, ki minimizira čas potovanja kroglice po njegovem grafu od $T_1$ do $T_2$.
 
-\section{Rešitev}
+\section{Izpeljava}
 
 Naloga se zdi podobna znamenitemu problemu o brahistohroni, ki ga je zastavil Jacob Bernoulli.
 Označimo iskan polinom s $p(x) = ax^3+bx^2+cx+d$. Polinom $p$ bo določen, ko bomo poznali njegove koeficiente $a$, $b$, $c$ in $d$.
@@ -41,6 +41,7 @@ S tem bo graf polinoma med $T_{1}'$ in $T_{2}'$ ves čas pod abscisno osjo. Če 
 
 Izračunajmo koeficiente polinoma $p$. Vemo, da je kubični polinom enolično določen s štirimi točkami v ravnini. V našem primeru so znane tri točke na polinomu, kar pomeni, da bomo imeli en prost parameter. Vstavimo koordinate točk $T_{1}'$, $T_{2}'$ in $T_{3}'$ v izraz za polinom $p$ in računajmo:
 \begin{equation}
+\label{Eq:p(T_{1}')}
 p(0) = d = 0,
 \end{equation}
 %
@@ -88,6 +89,7 @@ v = \sqrt{2g(-p)}.
 %
 Vemo še, da je ločna dolžina enaka $ds^2 = dx^2 + dp^2$. Označimo parcialni odvod polinoma $p$ po spremenljivki $x$ z $\frac{dp}{dx}=p'$. Enačba~\eqref{Eq:Cas} tako dobi obliko
 \begin{equation}
+\label{Eq:CasInt}
 T(a) = \int_{0}^{x_2-x_1} \sqrt{ \frac{1+p'^2}{-2gp}} dx,
 \end{equation}
 kjer smo s $T$ označili funkcijo časa, odvisno od spremenljivke $a$. Naša naloga je poiskati njen minimum.
@@ -99,6 +101,14 @@ Označimo polinom skozi premaknjene točke s $p_1(x) = ax^3+bx^2+cx+d$ (njegove 
 p(x) = a(x-x_1)^3 + b(x-x_1)^2 + c(x-x_1) + d + y_1.
 \end{align}
 Ker poznamo koeficiente $a$, $b$, $c$ in $d$, vrednosti $x_1$ in $y_1$ pa sta koordinati točke $T_1$, poznamo tudi iskani polinom $p$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Numerična rešitev
+\section{Numerična rešitev}
+
+Vrednost spremenljivke $a$, ki minimizira funkcijo časa $T$ poiščemo numerično. Oglejmo si program \texttt{doloci\_polinom.m} v Matlabu.
+
+Program kot argumente sprejme koordinate tock $T_1$ in $T_2$ pri čemer velja $x_1, y_1, x_2, y_2 \in \mathbb{R}$, $y_1 > y_2$ in $x_1 < x_2$. Kot smo razmislili v prejšnjem poglavju, je smiselno točke translirati tako, da točka $T_1$ leži v koordinatnem izhodišču. Koeficiente transliranega polinoma $p$ definiramo kot funkcije spremenljivke $a$, ter definiramo polinom in njegov odvod, ki sta funkciji spremenljivk $a$ in $x$. Funkcijo $T$ definiramo kot v enačbi~\eqref{Eq:CasInt}. Za minimizacijo te funkcije uporabimo vgrajeno funkcijo \texttt{fminsearch}, ki vrne iskano vrednost spremenljivke $a$, pri kateri je čas potovanja kroglice po grafu polinoma najmanjši. Vrednost označimo z $A$.
+Kako smo določili začetni približek za vrednost $A$, ki je obvezen argument funkcije \texttt{fminsearch}? Že v začetku smo premislili, da bo vodilni koeficient polinoma negativen. Če izberemo $a=0$, se translirani polinom glasi $p(x) = \frac{y_2-y_1}{x_2-x_1} x$, kar je premica skozi točke $T_{1}'$, $T_{2}'$ in $T_{3}'$. Z naraščanjem absolutne vrednosti $a$ postaja graf polinoma čedalje bolj ukrivljen. Tako za $a<0$ kmalu doseže nenegativne vrednosti med točkama $T_{3}'$ in $T_{2}'$; izračunan čas je v tem primeru kompleksno število, zato smo v težavah. Vendar na konkretnih primerih ugotovimo, da je za negativne vrednosti $a$, ki so blizu $0$ potreben čas manjši od časa potovanja po premici, z manjšanjem $a$ od neke vrednosti $a$ dalje pa se čas povečuje. Nadalje obstaja še manjša vrednost $a$, pri kateri graf polinoma preide abscisno os. Od tod sklepamo, da je ustrezen začetni približek $A=0$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Literatura
