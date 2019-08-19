@@ -174,7 +174,7 @@ Druga slika, ki jo vrne program \texttt{risi\_polinom.m} predstavlja graf iskane
 %
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[scale=0.6]{primer2-PolBrah.png}
+\includegraphics[scale=0.52]{primer2-PolBrah.png}
 \caption{Kubični polinom in brahstohrona, določeni s točkama $T_1(1,5)$ in $T_2(7,2)$.}
 \end{center}
 \end{figure}
@@ -199,35 +199,39 @@ x_2 &= 9.456721915285449, \\
 y_2 &= 2.792056074766355.
 \end{align*}
 %
-Program izriše naslednji sliki.
+Izračunane vrednosti koeficientov polinoma $p$ so enake:
+\begin{align*}
+a &= -0.023312500000000, \\
+b &= 0.298168162983425, \\ 
+c &= -1.573604813684224, \\ 
+d &= 0.
+\end{align*}
+Če koeficiente vstavimo v zvezo~\eqref{Eq:r(x)} in upoštevamo koordinate izbranih točk $T_1$ in $T_2$, dobimo eksplicitno formulo iskanega polinoma $r$.
 
+Program izriše naslednji sliki. Na prvi spet opazimo, da je graf transliranega polinoma med točkama $T_1(x_1,y_1)$ in $T_2(x_2,y_2)$ pod abscisno osjo.
+%
 \begin{figure}[h!]
-\includegraphics[scale=0.6]{primer1-polinom.png}
-\caption{Kubični polinom, ki minimizira čas potovanja kroglice skozi točke $T_1$, $T_2$ in $T_3$, je predstavljen s polno črto. S črtkano črto je predstavljen transliran polinom skozi koordinatno izhodišče.}
+\begin{center}
+\includegraphics[scale=0.52]{primer1-polinom.png}
+\caption{Kubična polinoma, določena s točkama, izbranima z grafičnim vmesnikom.}
+\end{center}
+\end{figure}
+%
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.52]{primer1-PolBrah.png}
+\caption{Kubični polinom in brahistohrona, določeni s točkama, izbranima z grafičnim vmesnikom.}
+\end{center}
 \end{figure}
 
-\begin{figure}[h!]
-\includegraphics[scale=0.6]{primer1-PolBrah.png}
-\caption{Z rdečo barvo je predstavljen kubični polinom, ki minimizira čas potovanja kroglice skozi točke $T_1$, $T_2$ in $T_3$, z modro pa brahistohorna skozi točki $T_1$ in $T_2$.}
-\end{figure}
-
-Izračunani časi potovanja po kubičnem polinomu, brahistohorni in premici:
+Zapišimo še izračunane čase potovanja po kubičnem polinomu, brahistohroni in premici:
 \begin{align*}
 t_{polinom} &= 1.800452978985828, \\
 t_{brahistohrona} &= 1.657073117759419, \\
 t_{premica} &= 1.913116876467396.
 \end{align*}
 %
-Opazimo, da se numerični rezultati ujemajo s pričakovanji: čas potovanja po brahistohroni je najmanjši, sledi mu kubični polinom, premica pa da najpočasnejšo pot.
-
-Izračunajmo še vrednost koeficientov polinoma $p$:
-\begin{align*}
-a &= -0.023312500000000, \\
-b &= 0.269188535911602, \\ 
-c &= -1.507190104569076, \\ 
-d &= 0.
-\end{align*}
-Če koeficiente vstavimo v zvezo~\eqref{Eq:r(x)} in upoštevamo koordinate izbranih točk $T_1$ in $T_2$, dobimo eksplicitno formulo iskanega polinoma $r$.
+Opazimo, da se numerični rezultati ujemajo s pričakovanji: čas potovanja po brahistohroni je najmanjši, sledi mu kubični polinom, premica pa da najdaljšo pot.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Literatura

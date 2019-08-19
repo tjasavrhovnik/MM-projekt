@@ -22,7 +22,7 @@ T2 = [x2, y2]
 g = 9.8;
 
 % Dolocimo parameter a.
-a = doloci_polinom(x1,y1,x2,y2)
+a = doloci_polinom(x1,y1,x2,y2);
 
 % Izracunamo ostale koeficiente polinoma (skozi izhodisce) preko a.
 b = @(a) -3/2*a*(x2-x1);
