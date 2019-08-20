@@ -1,8 +1,10 @@
 function A = doloci_polinom(x1,y1,x2,y2)
-% Program doloci parametre kubicnega polinoma
-% skozi tocke T1=(x1,y1), T2=(x2,y2), T3=T1+1/2(T2-T1),
-% po katerem kroglica potuje najhitreje. (x1<x2, y1>y2)
-% p(x)=ax^3+bx^2+cx+d
+% Program doloci vodilni koeficient transliranega
+% kubicnega polinoma (ki ustreza polinomu skozi tocke
+% T1=(x1,y1), T2=(x2,y2), T3=T1+1/2(T2-T1)) skozi 
+% izhodisce, po katerem kroglica potuje najhitreje.
+% Velja x1<x2, y1>y2.
+% Polinom: p(x)=ax^3+bx^2+cx+d
 % Vhodni podatki so koordinate tock T1 in T2.
 
 % gravitacijski pospesek
@@ -28,5 +30,5 @@ dp = @(a,x) 3.*a.*x.^2 + 2.*b(a).*x + c(a);
 f = @(a,x) ((1+dp(a,x).^2)./(-2*g.*p(a,x))).^(1/2);
 T = @(a) integral(@(x) f(a,x), 0, x2-x1);
 
-% Minimiziramo cas potovanja
+% Minimiziramo cas potovanja:
 A = fminsearch(T, 0);

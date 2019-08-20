@@ -1,6 +1,6 @@
 % Uporabnik graficno izbere dve tocki v koordinatnem sistemu.
 % Program doloci koeficiente kubicnega polinoma skozi izhodisce,
-% ki minimizira cas potovanja kroglice, in ga narise.
+% ki minimizira cas potovanja kroglice.
 % Nato doloci polinom skozi tocke T1, T2, T3 iz podatkov.
 % Narise oba polinoma.
 % Izracuna cas potovanja po iskanem polinomu, ter za primerjavo
@@ -55,7 +55,7 @@ hold off
 
 figure
 
-% Na drugi sliki sta iskan polinom, brahistohorna in tocke T1, T2, T3.
+% Na drugi sliki sta iskan polinom, brahistohrona in tocke T1, T2, T3.
 hold on
 s = linspace(x1,x2,100);
 plot(x1, y1, 'x', 'color','k')
@@ -67,7 +67,7 @@ hold off
 
 % CAS POTOVANJA
 % Cas potovanja izracunamo za polinom p (saj je v celoti pod x-osjo),
-% sicer pa sta casa potovanja po obeh polinomih enaka.
+% sicer pa sta casa potovanj po obeh polinomih enaka.
 dp = @(x) 3*a.*x.^2+2*b(a).*x+c(a);
 f = @(x) sqrt((1+dp(x).^2)./(-2*g.*p(x)));
 t_polinom = integral(f,0,x2-x1)
