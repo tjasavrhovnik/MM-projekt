@@ -55,7 +55,7 @@ hold off
 
 figure
 
-% Na drugi sliki sta iskan polinom, brahistohrona in tocke T1, T2, T3.
+% Na drugi sliki so iskan polinom, brahistohrona in tocke T1, T2, T3.
 hold on
 s = linspace(x1,x2,100);
 plot(x1, y1, 'x', 'color','k')

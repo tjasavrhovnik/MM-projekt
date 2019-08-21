@@ -34,7 +34,7 @@ Rešujemo naslednji problem: V ravnini sta dani dve točki, $T_{1}(x_1,y_1)$ in 
 \section{Izpeljava}
 
 Naloga se zdi podobna znamenitemu problemu o brahistohroni, ki ga je zastavil Jacob Bernoulli.
-Označimo iskan polinom z $r(x) = a_{3}x^3+a_{2}x^2+a_{1}x+a_{0}$. Polinom $r$ bo določen, ko bomo poznali njegove koeficiente $a_{3}$, $a_{2}$, $a_{1}$ in $a_{0}$.
+Označimo iskan kubični polinom z $r(x) = a_{3}x^3+a_{2}x^2+a_{1}x+a_{0}$. Polinom $r$ bo določen, ko bomo poznali njegove koeficiente $a_{3}$, $a_{2}$, $a_{1}$ in $a_{0}$.
 Za lažje računanje za začetek prestavimo točke tako, da bo $T_1$ v koordinatnem izhodišču. Označimo nove točke:
 \begin{align*}
 T_{1}' &= (0,0), \\
@@ -59,7 +59,7 @@ p(x_2-x_1) = a(x_2-x_1)^3+b(x_2-x_1)^2+c(x_2-x_1) = y_2-y_1,
 p \left(\frac{x_2-x_1}{2} \right) = a \left(\frac{x_2-x_1}{2} \right)^3+b \left(\frac{x_2-x_1}{2} \right)^2+c \frac{x_2-x_1}{2} = \frac{y_2-y_1}{2}.
 \end{equation}
 %
-Pomnožimo enačbo~\eqref{Eq:p(T_{3}')} z $2$ in jo odštejmo od enačbe~\eqref{Eq:p(T_{2}')}. Dobimo
+Pomnožimo enačbo~\eqref{Eq:p(T_{3}')} s faktorjem $2$ in jo odštejmo od enačbe~\eqref{Eq:p(T_{2}')}. Dobimo
 \begin{align}
 \frac{3}{4} a(x_2-x_1)^3 + \frac{1}{2} b(x_2-x_1)^2 &= 0, \nonumber \\
 \frac{3}{2} a(x_2-x_1) + b &= 0, \nonumber \\
@@ -102,14 +102,12 @@ Analitično iskanje minimuma funkcije $T$ je zahtevno; pomagali si bomo z numeri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Numerična rešitev
 \section{Numerična rešitev}
 
-Vrednost spremenljivke $a$, ki minimizira funkcijo časa $T$ poiščemo numerično. 
-
 %%%
 \subsection{Program \texttt{doloci\_polinom.m}}
 
 Oglejmo si program \texttt{doloci\_polinom.m} v Matlabu.
 Program kot argumente sprejme koordinate točk $T_1$ in $T_2$ pri čemer velja $x_1, y_1, x_2, y_2 \in \mathbb{R}$, $y_1 > y_2$ in $x_1 < x_2$. Kot smo razmislili v prejšnjem poglavju, je smiselno točke translirati tako, da točka $T_1$ leži v koordinatnem izhodišču. Koeficiente transliranega polinoma $p$ definiramo kot funkcije spremenljivke $a$, ter definiramo polinom in njegov odvod, ki sta funkciji spremenljivk $a$ in $x$. Funkcijo $T$ definiramo kot v enačbi~\eqref{Eq:CasInt}. Za minimizacijo te funkcije uporabimo vgrajeno funkcijo \texttt{fminsearch}, ki vrne iskano vrednost spremenljivke $a$, pri kateri je čas potovanja kroglice po grafu polinoma najmanjši. Vrednost v programu označimo z $A$.
-Kako smo določili začetni približek za vrednost $A$, ki je obvezen argument funkcije \texttt{fminsearch}? Že v začetku smo premislili, da bo vodilni koeficient polinoma negativen. Če izberemo $a=0$, se translirani polinom glasi $p(x) = \frac{y_2-y_1}{x_2-x_1} x$, kar je premica skozi točke $T_{1}'$, $T_{2}'$ in $T_{3}'$. Z naraščanjem absolutne vrednosti $a$ postaja graf polinoma čedalje bolj ukrivljen. Tako za $a<0$ kmalu doseže nenegativne vrednosti med točkama $T_{3}'$ in $T_{2}'$; izračunan čas je v tem primeru kompleksno število, zato smo v težavah. Vendar na konkretnih primerih ugotovimo, da je za negativne vrednosti $a$, ki so blizu $0$ potreben čas manjši od časa potovanja po premici, z manjšanjem $a$ od neke vrednosti $a$ dalje pa se čas povečuje. Nadalje obstaja še manjša vrednost $a$, pri kateri graf polinoma preide abscisno os. Od tod sklepamo, da je ustrezen začetni približek $A=0$.
+Kako smo določili začetni približek za vrednost $A$, ki je obvezen argument funkcije \texttt{fminsearch}? Že v začetku smo premislili, da bo vodilni koeficient polinoma negativen. Če izberemo $a=0$, se translirani polinom glasi $p(x) = \frac{y_2-y_1}{x_2-x_1} x$, kar je premica skozi točke $T_{1}'$, $T_{2}'$ in $T_{3}'$. Z naraščanjem absolutne vrednosti $a$ postaja graf polinoma čedalje bolj ukrivljen. Tako za $a<0$ kmalu doseže nenegativne vrednosti med točkama $T_{3}'$ in $T_{2}'$; izračunan čas je v tem primeru kompleksno število, zato smo v težavah. Vendar na konkretnih primerih ugotovimo, da je za negativne vrednosti $a$, ki so blizu $0$, potreben čas manjši od časa potovanja po premici, z manjšanjem $a$ od neke vrednosti $a$ dalje, pa se čas povečuje. Nadalje obstaja še manjša vrednost $a$, pri kateri graf polinoma preide abscisno os. Od tod sklepamo, da je ustrezen začetni približek $A=0$.
 
 Program \texttt{doloci\_polinom.m} vrne vodilni koeficient polinoma $p$ skozi translirane točke, od koder lahko izračunamo ostale koeficiente polinoma. 
 Našli smo torej polinom, ki minimizira čas potovanja kroglice skozi točke $T_{1}'$, $T_{2}'$ in $T_{3}'$. Vendar je naša naloga poiskati polinom $r$, ki vsebuje točke $T_1$, $T_2$ in $T_3$. Časa potovanj po grafih obeh polinomov sta enaka, saj se obliki (ukrivljenosti) polinomov ujemata. Iskani polinom namreč dobimo tako, da polinom skozi premaknjene točke transliramo za krajevni vektor točke $T_1$.
@@ -118,7 +116,7 @@ Polinom skozi prvotne točke, ki nas zanima, ustreza zvezi
 \label{Eq:r(x)}
 r(x) = a(x-x_1)^3 + b(x-x_1)^2 + c(x-x_1) + d + y_1.
 \end{align}
-Ker poznamo koeficiente $a$, $b$, $c$ in $d$, vrednosti $x_1$ in $y_1$ pa sta koordinati točke $T_1$, poznamo tudi iskani polinom $p$.
+Ker poznamo koeficiente $a$, $b$, $c$ in $d$, vrednosti $x_1$ in $y_1$ pa sta koordinati točke $T_1$, poznamo tudi iskani polinom $r$.
 
 %%%
 \subsection{Program \texttt{risi\_polinom.m}}
@@ -162,7 +160,7 @@ Koordinate točk vstavimo še v program \texttt{risi\_polinom.m} in si oglejmo s
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.52]{primer2-polinom.png}
-\caption{Grafa polinomov, določenih s točkama $T_1(1,5)$ in $T_2(7,2)$.}
+\caption{Grafa kubičnih polinomov, določenih s točkama $T_1(1,5)$ in $T_2(7,2)$.}
 \end{center}
 \end{figure}
 %
